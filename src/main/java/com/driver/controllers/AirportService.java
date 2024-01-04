@@ -1,6 +1,5 @@
 package com.driver.controllers;
 
-
 import com.driver.model.Airport;
 import com.driver.model.City;
 import com.driver.model.Flight;
@@ -8,62 +7,56 @@ import com.driver.model.Passenger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class AirportService {
+    AirportRepository airportRepositorye=new AirportRepository();
+    public void addAirport(Airport airport) {
 
-
-    private AirportRepository repo  = new AirportRepository();
-
-    public void addairport(Airport a){
-        repo.addAirport(a);
+        airportRepositorye.addAirport(airport);
+    }
+    public String getLargestAirportName(){
+        return airportRepositorye.getLargestAirportName();
     }
 
-    public String getlargestAirport(){
-        return repo.getLargestAirport();
+    public void addFlight(Flight flight) {
+        airportRepositorye.addFlight(flight);
     }
 
-    public double getshortestTimeTravel(City from , City to){
-        return repo.getShortestTimeTravel(from, to);
+    public double getShortestDurationOfPossibleBetweenTwoCities(City fromCity, City toCity) {
+        return airportRepositorye.getShortestDurationOfPossibleBetweenTwoCities( fromCity,  toCity);
     }
 
-    public int getNumberOfPeopleHavingfight(Date date , String airPortName){
-        return repo.getNumberOfPeopleHavingFight(date , airPortName);
+    public void addPassenger(Passenger passenger) {
+        airportRepositorye.addPassenger(passenger);
     }
 
-    public int getfare(Integer flightId){
-        return repo.getFare(flightId);
+    public int getNumberOfPeopleOn(Date date, String airportName) {
+        return airportRepositorye.getNumberOfPeopleOn(date,airportName);
     }
 
-    public String bookticket(Integer fightId  , Integer passengerId){
-        return repo.bookTicket(fightId , passengerId);
+    public int calculateFlightFare(Integer flightId) {
+        return airportRepositorye.calculateFlightFare(flightId);
     }
 
-    public String cancelticket(Integer fId , Integer pId){
-        return repo.cancelTicket(fId , pId);
+    public String bookATicket(Integer flightId, Integer passengerId) {
+        return airportRepositorye.bookATicket(flightId,passengerId);
     }
 
-    public int countOfbookingDoneByaPassenger(Integer pId){
-        return repo.countOfBookingDoneByaPassenger(pId);
+    public String cancelATicket(Integer flightId, Integer passengerId) {
+        return  airportRepositorye.cancelATicket( flightId , passengerId);
     }
 
-    public String  addflight(Flight f){
-        return repo.addFlight(f);
+    public int countOfBookingsDoneByPassengerAllCombined(Integer passengerId) {
+        return airportRepositorye.countOfBookingsDoneByPassengerAllCombined( passengerId);
     }
 
-    public String getAirportNamefromFlightId(Integer fId){
-        return repo.getAirportNameFromFlightId(fId);
+    public String getAirportNameFromFlightId(Integer flightId) {
+        return airportRepositorye.getAirportNameFromFlightId(flightId);
     }
 
-    public int getrevenueOfAFlight(Integer fId){
-        return repo.getRevenueOfAFlight(fId);
+    public int calculateRevenueOfAFlight(Integer flightId) {
+        return airportRepositorye.calculateRevenueOfAFlight(flightId);
     }
-
-    public String addpassenger(Passenger p){
-        return repo.addPassenger(p);
-    }
-
 }
